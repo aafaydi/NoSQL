@@ -1,7 +1,7 @@
 const {thought,user} = require('../models');
 
 
-module.exports = {
+const thoughtController = {
   getAllusers(req,res) {
     user.find()
    
@@ -12,7 +12,7 @@ module.exports = {
     });
   },
 
-  getusersById(req,res) {
+  getusersById({params},res) {
     user.findOne({_id: params.id })
     
    
@@ -36,14 +36,14 @@ module.exports = {
     user.findOneAndUpdate({ _id : params.id}, body, {new: true})
     .then(dbuserData => {
       if(dbuserData == null)
-      res.status(404).json("thought not found");
+      res.status(404).json("user not found");
       else
       res.json(dbuserData);
     })
     .catch(err => res.json(err));
   },
 
-  createusers({params,body},res) {
+  createusers({body},res) {
     user.create(body) 
     .then(dbuserData => {
       res.json(".hasbeencreated")
@@ -95,4 +95,5 @@ deleteFriend({ params }, res) {
 
 
 };
+module.exports = thoughtController;
 

@@ -1,7 +1,7 @@
 const {thought,user} = require('../models');
 
 
-module.exports = {
+const thoughtController = {
   getAllthought(req,res) {
     thought.find()
    
@@ -95,4 +95,5 @@ deleteReaction({params}, res) {
 },
 
 }
+module.exports = thoughtController;
 
