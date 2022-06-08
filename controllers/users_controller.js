@@ -12,7 +12,7 @@ module.exports = {
     });
   },
 
-  getSingleusers(req,res) {
+  getusersById(req,res) {
     user.findOne({_id: params.id })
     
    
