@@ -65,7 +65,7 @@ module.exports = {
 
   // Delete a current user by ID
   addFriend({params}, res) {
-     user.findOneAndUpdate({_id: params.userid}, {$push: { friends: params.friendId}}, {new: true})
+     user.findOneAndUpdate({_id: params.userId}, {$push: { friends: params.friendId}}, {new: true})
     .populate({path: 'friends', select: ('-__v')})
     .select('-__v')
     .then(dbuserData => {
@@ -80,7 +80,7 @@ module.exports = {
 
 // Delete a current Friend
 deleteFriend({ params }, res) {
-    user.findOneAndUpdate({_id: params.thoughtid}, {$pull: { friends: params.friendId}}, {new: true})
+    user.findOneAndUpdate({_id: params.userId}, {$pull: { friends: params.friendId}}, {new: true})
     .populate({path: 'friends', select: '-__v'})
     .select('-__v')
     .then(dbuserData => {
