@@ -14,17 +14,20 @@ const {
 router
   .route('/')
   .get(getAllusers)
-  .post(createusers)
-  .post(addFriend);
+  .post(createusers);
+  
 
 // Set up GET one, PUT, and DELETE at /api/users/:id
 router
   .route('/:id')
   .get(getusersById)
   .put(updateusers)
-  .delete(deleteusers)
-  .delete(deleteFriend);
+  .delete(deleteFriend)
+  .post(addFriend)
+  .delete(deleteusers);
+
   
+
 // router
 //   .route('/:userId/friends/:friendId')
 //   .post(addFriend)

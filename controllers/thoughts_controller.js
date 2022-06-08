@@ -70,7 +70,7 @@ module.exports = {
     .select('-__v')
     .then(dbthoughtData => {
     if (!dbthoughtData) {
-        res.status(404).json({message: 'No thoughts with this particular ID!'});
+        res.status(404).json({message: 'No Reaction with this particular ID!'});
         return;
     }
     res.json(dbthoughtData);
@@ -78,6 +78,21 @@ module.exports = {
     .catch(err => res.status(400).json(err))
 
   
-}
+},
+
+deleteReaction({params}, res) {
+  thought.findOneAndUpdate({_id: params.thoughtId}, {$pull: {reactions: {reactionId: params.reactionId}}}, {new: true})
+.then((thought) => {
+  if (!thought) {
+      res.status(404).json({
+          message: 'No reaction found with this id.'
+      });
+      return;
+  }
+  res.json(thought)
+})
+.catch(err => res.json(err));
+},
 
 }
+
