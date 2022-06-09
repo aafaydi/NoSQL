@@ -25,6 +25,7 @@ Express
   $ npm start
 
 Clone the repo, navigate to the root folder, run the following commands from the CLI:
+https://github.com/aafaydi/NoSQL
 
 # Install Dependencies;
 This repo is not to be deployed, if you wanted to, you could by doing the following:
@@ -39,8 +40,8 @@ Run the following at the command line
 
 # Demonstrations:
 Video demonstrations can be found on my YouTube channel by clikcing the link below.
-
-
+https://youtu.be/rEDv8K9bT0c
+https://youtu.be/_AIB2YYVnaU
 
 License
 MIT License
