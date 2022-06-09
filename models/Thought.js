@@ -25,9 +25,6 @@ const thoughtschema = new Schema({
         reactionSchema
     ]
 
-
-
-
 },
     {
         toJSON: {

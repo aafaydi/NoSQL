@@ -1,9 +1,9 @@
-const {thought,user} = require('../models');
+const {Thought} = require('../models');
 
 
 const thoughtController = {
   getAllthought(req,res) {
-    thought.find()
+    Thought.find()
    
     .then(dbthoughtData => res.json(dbthoughtData))
     .catch(err => {
@@ -12,7 +12,7 @@ const thoughtController = {
     });
   },
   getthoughtById({params},res) {
-    thought.findOne({_id: params.id })
+    Thought.findOne({_id: params.id })
     .populate({
         path: 'reactions',
         select: '-__v'
@@ -34,7 +34,7 @@ const thoughtController = {
   },
 
   createthought({params,body},res) {
-   thought.create(body) 
+   Thought.create(body) 
    .then(dbthoughtData => {
      res.json(".hasbeencreated")
    })
@@ -43,7 +43,7 @@ const thoughtController = {
 
   updatethought({params, body},res) {
 
-    thought.findOneAndUpdate({ _id : params.id}, body, {new: true})
+    Thought.findOneAndUpdate({ _id : params.id}, body, {new: true})
     .then(dbthoughtData => {
       if(dbthoughtData == null)
       res.status(404).json("thought not found");
@@ -55,7 +55,7 @@ const thoughtController = {
 
   deletethought({ params }, res) 
   {
-    thought.findByIdAndDelete({_id: params.id})
+    Thought.findByIdAndDelete({_id: params.id})
     .then(dbthoughtData => {
       res.json(".hasbeendeleted")
        }
@@ -65,7 +65,7 @@ const thoughtController = {
 
 
   addReaction({params, body}, res) {
-    thought.findOneAndUpdate({_id: params.thoughtId}, {$push: {reactions: body}}, {new: true, runValidators: true})
+    Thought.findOneAndUpdate({_id: params.thoughtId}, {$push: {reactions: body}}, {new: true, runValidators: true})
     .populate({path: 'reactions', select: '-__v'})
     .select('-__v')
     .then(dbthoughtData => {
@@ -81,7 +81,7 @@ const thoughtController = {
 },
 
 deleteReaction({params}, res) {
-  thought.findOneAndUpdate({_id: params.thoughtId}, {$pull: {reactions: {reactionId: params.reactionId}}}, {new: true})
+  Thought.findOneAndUpdate({_id: params.thoughtId}, {$pull: {reactions: {reactionId: params.reactionId}}}, {new: true})
 .then((thought) => {
   if (!thought) {
       res.status(404).json({

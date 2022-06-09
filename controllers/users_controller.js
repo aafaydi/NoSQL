@@ -1,9 +1,9 @@
-const {thought,user} = require('../models');
+const {User} = require('../models');
 
 
 const thoughtController = {
   getAllusers(req,res) {
-    user.find()
+    User.find()
    
     .then(dbuserData => res.json(dbuserData))
     .catch(err => {
@@ -13,7 +13,7 @@ const thoughtController = {
   },
 
   getusersById({params},res) {
-    user.findOne({_id: params.id })
+    User.findOne({_id: params.id })
     
    
        // return if no user is found 
@@ -33,7 +33,7 @@ const thoughtController = {
 
   updateusers({params, body},res) {
 
-    user.findOneAndUpdate({ _id : params.id}, body, {new: true})
+    User.findOneAndUpdate({ _id : params.id}, body, {new: true})
     .then(dbuserData => {
       if(dbuserData == null)
       res.status(404).json("user not found");
@@ -44,7 +44,7 @@ const thoughtController = {
   },
 
   createusers({body},res) {
-    user.create(body) 
+    User.create(body) 
     .then(dbuserData => {
       res.json(".hasbeencreated")
     })
@@ -54,7 +54,7 @@ const thoughtController = {
 
   deleteusers({ params }, res) 
   {
-    user.findByIdAndDelete({_id: params.id})
+    User.findByIdAndDelete({_id: params.id})
     .then(dbuserData => {
       res.json(".hasbeendeleted")
        }
@@ -65,7 +65,7 @@ const thoughtController = {
 
   // Delete a current user by ID
   addFriend({params}, res) {
-     user.findOneAndUpdate({_id: params.userId}, {$push: { friends: params.friendId}}, {new: true})
+     User.findOneAndUpdate({_id: params.userId}, {$push: { friends: params.friendId}}, {new: true})
     .populate({path: 'friends', select: ('-__v')})
     .select('-__v')
     .then(dbuserData => {
@@ -80,7 +80,7 @@ const thoughtController = {
 
 // Delete a current Friend
 deleteFriend({ params }, res) {
-    user.findOneAndUpdate({_id: params.userId}, {$pull: { friends: params.friendId}}, {new: true})
+    User.findOneAndUpdate({_id: params.userId}, {$pull: { friends: params.friendId}}, {new: true})
     .populate({path: 'friends', select: '-__v'})
     .select('-__v')
     .then(dbuserData => {
